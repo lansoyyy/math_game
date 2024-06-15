@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:math_game/screens/categ_screen.dart';
 import 'package:math_game/widgets/button_widget.dart';
+import 'package:math_game/widgets/text_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CategScreen extends StatelessWidget {
+  const CategScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,36 +29,51 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(
-                        Icons.settings,
+                        Icons.arrow_back,
                         color: Colors.white,
                         size: 35,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.volume_down,
-                        color: Colors.white,
-                        size: 35,
-                      ),
+                    const SizedBox(
+                      width: 50,
                     ),
                   ],
                 ),
               ),
             ),
+            TextWidget(
+              align: TextAlign.center,
+              maxLines: 2,
+              text: 'GAME\nCATEGORY',
+              fontSize: 48,
+              color: Colors.red,
+              fontFamily: 'Bold',
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 250),
+              padding: const EdgeInsets.only(top: 100),
               child: Center(
                 child: ButtonWidget(
+                  fontSize: 14,
                   radius: 100,
                   color: Colors.grey,
-                  label: 'ENTER',
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const CategScreen()));
-                  },
+                  label: 'ARITHMETIC\nOPERATION',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Center(
+                child: ButtonWidget(
+                  fontSize: 14,
+                  radius: 100,
+                  color: Colors.grey,
+                  label: 'ROMAN\nNUMERALS',
+                  onPressed: () {},
                 ),
               ),
             ),
