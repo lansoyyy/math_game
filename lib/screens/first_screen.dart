@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:math_game/screens/second_screen.dart';
-import 'package:math_game/screens/first_screen.dart';
+import 'package:math_game/screens/third_screen.dart';
 import 'package:math_game/widgets/button_widget.dart';
+import 'package:math_game/widgets/text_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,35 +31,48 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(
-                        Icons.settings,
+                        Icons.arrow_back,
                         color: Colors.white,
                         size: 35,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.volume_down,
-                        color: Colors.white,
-                        size: 35,
-                      ),
+                    const SizedBox(
+                      width: 50,
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 250),
+              padding: const EdgeInsets.only(top: 200),
               child: Center(
                 child: ButtonWidget(
+                  fontSize: 14,
                   radius: 100,
                   color: Colors.grey,
-                  label: 'ENTER',
+                  label: 'BASIC\nNUMERACY',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstScreen()));
+                        builder: (context) => const SecondScreen()));
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Center(
+                child: ButtonWidget(
+                  fontSize: 14,
+                  radius: 100,
+                  color: Colors.grey,
+                  label: 'INTERMEDIATE\nNUMERACY',
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ThirdScreen()));
                   },
                 ),
               ),

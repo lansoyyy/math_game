@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
-class CategScreen extends StatelessWidget {
-  const CategScreen({super.key});
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class CategScreen extends StatelessWidget {
                   fontSize: 14,
                   radius: 100,
                   color: Colors.grey,
-                  label: 'ARITHMETIC\nOPERATION',
+                  label: 'ASCII CODE\nCONVERTION',
                   onPressed: () {},
                 ),
               ),
@@ -72,7 +72,19 @@ class CategScreen extends StatelessWidget {
                   fontSize: 14,
                   radius: 100,
                   color: Colors.grey,
-                  label: 'ROMAN\nNUMERALS',
+                  label: 'NUMBER\nSYSTEM',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Center(
+                child: ButtonWidget(
+                  fontSize: 14,
+                  radius: 100,
+                  color: Colors.grey,
+                  label: 'IP CLASSES\nFUNDAMENTALS',
                   onPressed: () {},
                 ),
               ),
