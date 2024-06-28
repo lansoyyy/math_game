@@ -56,21 +56,32 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Image.asset(
-              'assets/images/character.png',
-            ),
             Padding(
-              padding: const EdgeInsets.only(top: 500),
-              child: Center(
-                child: ButtonWidget(
-                  radius: 100,
-                  color: Colors.grey,
-                  label: 'START',
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstScreen()));
-                  },
-                ),
+              padding: const EdgeInsets.only(top: 400),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    'assets/images/character.png',
+                    height: 150,
+                    width: 100,
+                  ),
+                  Center(
+                    child: ButtonWidget(
+                      radius: 100,
+                      width: 200,
+                      color: Colors.blue,
+                      label: 'START',
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const FirstScreen()));
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 50,
+                  ),
+                ],
               ),
             ),
           ],
