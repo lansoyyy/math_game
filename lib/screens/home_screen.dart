@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_volume_controller/flutter_volume_controller.dart';
 import 'package:math_game/screens/second_screen.dart';
 import 'package:math_game/screens/first_screen.dart';
+import 'package:math_game/screens/settings_screen.dart';
 import 'package:math_game/widgets/button_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -30,7 +32,10 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SettingsScreen()));
+                      },
                       icon: const Icon(
                         Icons.settings,
                         color: Colors.white,
@@ -38,7 +43,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await FlutterVolumeController.setVolume(100);
+                      },
                       icon: const Icon(
                         Icons.volume_down,
                         color: Colors.white,
@@ -49,13 +56,16 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Image.asset(
+              'assets/images/character.png',
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 250),
+              padding: const EdgeInsets.only(top: 500),
               child: Center(
                 child: ButtonWidget(
                   radius: 100,
                   color: Colors.grey,
-                  label: 'ENTER',
+                  label: 'START',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const FirstScreen()));
