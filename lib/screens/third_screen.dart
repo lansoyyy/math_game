@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
+import 'game_screen.dart';
+
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({super.key});
 
@@ -61,7 +63,10 @@ class ThirdScreen extends StatelessWidget {
                   radius: 100,
                   color: Colors.grey,
                   label: 'ASCII CODE\nCONVERTION',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
+                  },
                 ),
               ),
             ),
@@ -73,7 +78,10 @@ class ThirdScreen extends StatelessWidget {
                   radius: 100,
                   color: Colors.grey,
                   label: 'NUMBER\nSYSTEM',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
+                  },
                 ),
               ),
             ),
@@ -85,7 +93,10 @@ class ThirdScreen extends StatelessWidget {
                   radius: 100,
                   color: Colors.grey,
                   label: 'IP CLASSES\nFUNDAMENTALS',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
+                  },
                 ),
               ),
             ),
