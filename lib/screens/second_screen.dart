@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:math_game/screens/game_screen.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
@@ -61,7 +62,10 @@ class SecondScreen extends StatelessWidget {
                   radius: 100,
                   color: Colors.grey,
                   label: 'ARITHMETIC\nOPERATION',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
+                  },
                 ),
               ),
             ),
@@ -73,7 +77,10 @@ class SecondScreen extends StatelessWidget {
                   radius: 100,
                   color: Colors.grey,
                   label: 'ROMAN\nNUMERALS',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GameScreen()));
+                  },
                 ),
               ),
             ),
