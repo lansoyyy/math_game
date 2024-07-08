@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+  List<Map<String, dynamic>> quizQuestions;
+
+  bool isroman;
+
+  GameScreen({super.key, required this.quizQuestions, this.isroman = false});
 
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -29,6 +33,8 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   bool _isAnimating = false;
+
+  int speed = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,7 @@ class _GameScreenState extends State<GameScreen> {
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
-                                size: 45,
+                                size: 35,
                                 color: Colors.white,
                               ),
                             ),
@@ -81,13 +87,10 @@ class _GameScreenState extends State<GameScreen> {
                               const Icon(
                                 Icons.favorite,
                                 color: Colors.red,
-                                size: 45,
+                                size: 35,
                               ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
                       ),
                       Align(
                         alignment: Alignment.topCenter,
@@ -111,7 +114,7 @@ class _GameScreenState extends State<GameScreen> {
                               ),
                               child: Center(
                                 child: TextWidget(
-                                  text: quizQuestions[index]['question'],
+                                  text: widget.quizQuestions[index]['question'],
                                   fontSize: 14,
                                 ),
                               ),
@@ -165,6 +168,11 @@ class _GameScreenState extends State<GameScreen> {
 
                       setState(() {
                         _isAnimating = false;
+                        speed = speed - 1;
+
+                        if (speed == 1) {
+                          speed = 5;
+                        }
                       });
 
                       try {
@@ -188,16 +196,19 @@ class _GameScreenState extends State<GameScreen> {
                       ? MediaQuery.of(context).size.height - 125
                       : 0,
                   duration:
-                      _isAnimating ? const Duration(seconds: 3) : Duration.zero,
+                      _isAnimating ? Duration(seconds: speed) : Duration.zero,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       for (int i = 0; i < 4; i++)
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          padding: EdgeInsets.only(
+                              left: 20, right: 20, bottom: i * 75),
                           child: Text(
-                            quizQuestions[index]['answers'][i],
+                            widget.isroman
+                                ? widget.quizQuestions[index]['options'][i]
+                                : widget.quizQuestions[index]['answers'][i],
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Bold',
@@ -207,6 +218,15 @@ class _GameScreenState extends State<GameScreen> {
                     ],
                   ),
                 ),
+                !_isAnimating
+                    ? Center(
+                        child: TextWidget(
+                          text: 'Tap to Begin',
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -240,37 +260,4 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   int index = 0;
-
-  List<Map<String, dynamic>> quizQuestions = [
-    {
-      'question': 'What is the capital of France?',
-      'answers': ['Paris', 'London', 'Berlin', 'Madrid'],
-      'correctAnswer': 'Paris'
-    },
-    {
-      'question': 'Which planet is known as the Red Planet?',
-      'answers': ['Earth', 'Mars', 'Jupiter', 'Saturn'],
-      'correctAnswer': 'Mars'
-    },
-    {
-      'question': 'Who wrote "To Kill a Mockingbird"?',
-      'answers': [
-        'Harper Lee',
-        'Mark Twain',
-        'Ernest Hemingway',
-        'F. Scott Fitzgerald'
-      ],
-      'correctAnswer': 'Harper Lee'
-    },
-    {
-      'question': 'What is the largest ocean on Earth?',
-      'answers': [
-        'Atlantic Ocean',
-        'Indian Ocean',
-        'Arctic Ocean',
-        'Pacific Ocean'
-      ],
-      'correctAnswer': 'Pacific Ocean'
-    },
-  ];
 }

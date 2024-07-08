@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:math_game/utlis/questions.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
@@ -65,7 +66,9 @@ class ThirdScreen extends StatelessWidget {
                   label: 'ASCII CODE\nCONVERTION',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const GameScreen()));
+                        builder: (context) => GameScreen(
+                              quizQuestions: asciiquestions,
+                            )));
                   },
                 ),
               ),
@@ -80,7 +83,9 @@ class ThirdScreen extends StatelessWidget {
                   label: 'NUMBER\nSYSTEM',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const GameScreen()));
+                        builder: (context) => GameScreen(
+                              quizQuestions: numbersystemsquestions,
+                            )));
                   },
                 ),
               ),
@@ -95,7 +100,9 @@ class ThirdScreen extends StatelessWidget {
                   label: 'IP CLASSES\nFUNDAMENTALS',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const GameScreen()));
+                        builder: (context) => GameScreen(
+                              quizQuestions: questions,
+                            )));
                   },
                 ),
               ),
