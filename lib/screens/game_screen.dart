@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:math_game/widgets/text_widget.dart';
+import 'package:math_game/widgets/toast_widget.dart';
 
 class GameScreen extends StatefulWidget {
   List<Map<String, dynamic>> quizQuestions;
@@ -35,6 +38,21 @@ class _GameScreenState extends State<GameScreen> {
   bool _isAnimating = false;
 
   int speed = 5;
+
+  List<int> getUniqueRandomNumbers(int count, int min, int max) {
+    Random random = Random();
+    Set<int> numbers = {};
+
+    while (numbers.length < count) {
+      int randomNumber = min + random.nextInt(max - min + 1);
+      numbers.add(randomNumber);
+    }
+
+    List<int> sortedNumbers = numbers.toList()..sort();
+    return sortedNumbers;
+  }
+
+  int life = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +101,7 @@ class _GameScreenState extends State<GameScreen> {
                               ),
                             ),
                             const Expanded(child: SizedBox()),
-                            for (int i = 0; i < 3; i++)
+                            for (int i = 0; i < life; i++)
                               const Icon(
                                 Icons.favorite,
                                 color: Colors.red,
@@ -190,6 +208,18 @@ class _GameScreenState extends State<GameScreen> {
                         print('stop');
                         Navigator.pop(context);
                       }
+
+                      if (getUniqueRandomNumbers(3, 3, 25).contains(index)) {
+                        setState(() {
+                          life--;
+
+                          if (life == 0) {
+                            Navigator.pop(context);
+
+                            showToast('You lost! Try again');
+                          }
+                        });
+                      }
                     }
                   },
                   top: _isAnimating
@@ -204,7 +234,7 @@ class _GameScreenState extends State<GameScreen> {
                       for (int i = 0; i < 4; i++)
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 20, right: 20, bottom: i * 75),
+                              left: 30, right: 30, bottom: i * 75),
                           child: Text(
                             widget.isroman
                                 ? widget.quizQuestions[index]['options'][i]
@@ -212,6 +242,7 @@ class _GameScreenState extends State<GameScreen> {
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Bold',
+                              fontSize: 28,
                             ),
                           ),
                         ),
