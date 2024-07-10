@@ -35,7 +35,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  bool _isAnimating = false;
+  bool _isAnimating = true;
 
   int speed = 5;
 
@@ -53,6 +53,8 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   int life = 3;
+
+  int number = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +117,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: Column(
                           children: [
                             TextWidget(
-                              text: 'Question',
+                              text: 'Question $number',
                               fontSize: 28,
                               color: Colors.white,
                               fontFamily: 'Bold',
@@ -143,38 +145,31 @@ class _GameScreenState extends State<GameScreen> {
                     ],
                   ),
                 ),
-                Positioned(
-                  left: MediaQuery.of(context).size.width / 2 -
-                      25 +
-                      characterPosition,
-                  top: 500,
-                  child: Image.asset(
-                    key: _key2,
-                    'assets/images/character.png',
-                    height: 150,
-                  ),
-                ),
-                Positioned(
-                  left: 50,
-                  bottom: 10,
-                  child: Container(
-                    color: Colors.white,
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_left),
-                      iconSize: 50,
-                      onPressed: moveLeft,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 50,
-                  bottom: 10,
-                  child: Container(
-                    color: Colors.white,
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_right),
-                      iconSize: 50,
-                      onPressed: moveRight,
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: moveLeft,
+                          child: Container(
+                            color: Colors.black.withOpacity(0.05),
+                            height: 300,
+                            width: MediaQuery.sizeOf(context).width / 1.90,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: moveRight,
+                          child: Container(
+                            color: Colors.black.withOpacity(0.05),
+                            height: 300,
+                            width: MediaQuery.sizeOf(context).width / 1.90,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -202,6 +197,8 @@ class _GameScreenState extends State<GameScreen> {
                             index++;
 
                             _isAnimating = true;
+
+                            number++;
                           });
                         });
                       } catch (e) {
@@ -223,13 +220,11 @@ class _GameScreenState extends State<GameScreen> {
                     }
                   },
                   top: _isAnimating
-                      ? MediaQuery.of(context).size.height - 125
+                      ? MediaQuery.of(context).size.height - 150
                       : 0,
                   duration:
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                  child: Wrap(
                     children: [
                       for (int i = 0; i < 4; i++)
                         Padding(
@@ -247,6 +242,17 @@ class _GameScreenState extends State<GameScreen> {
                           ),
                         ),
                     ],
+                  ),
+                ),
+                Positioned(
+                  left: MediaQuery.of(context).size.width / 2 -
+                      25 +
+                      characterPosition,
+                  top: 500,
+                  child: Image.asset(
+                    key: _key2,
+                    'assets/images/character.png',
+                    height: 125,
                   ),
                 ),
                 !_isAnimating
