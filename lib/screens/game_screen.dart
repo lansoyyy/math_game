@@ -35,7 +35,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  bool _isAnimating = true;
+  bool _isAnimating = false;
 
   int speed = 5;
 
