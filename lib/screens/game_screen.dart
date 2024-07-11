@@ -183,8 +183,10 @@ class _GameScreenState extends State<GameScreen> {
                         _isAnimating = false;
                         speed = speed - 1;
 
-                        if (speed == 1) {
+                        if (number == 15) {
                           speed = 5;
+                        } else if (number == 25) {
+                          speed = 3;
                         }
                       });
 
@@ -221,34 +223,38 @@ class _GameScreenState extends State<GameScreen> {
                   },
                   top: _isAnimating
                       ? MediaQuery.of(context).size.height - 150
-                      : 0,
+                      : 150,
                   duration:
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
-                  child: Wrap(
-                    children: [
-                      for (int i = 0; i < 4; i++)
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 30, right: 30, bottom: i * 75),
-                          child: Text(
-                            widget.isroman
-                                ? widget.quizQuestions[index]['options'][i]
-                                : widget.quizQuestions[index]['answers'][i],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Bold',
-                              fontSize: 28,
-                            ),
-                          ),
+                  child: !_isAnimating
+                      ? const SizedBox()
+                      : Wrap(
+                          children: [
+                            for (int i = 0; i < 4; i++)
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 30, right: 30, bottom: i * 75),
+                                child: Text(
+                                  widget.isroman
+                                      ? widget.quizQuestions[index]['options']
+                                          [i]
+                                      : widget.quizQuestions[index]['answers']
+                                          [i],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Bold',
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
                 ),
                 Positioned(
                   left: MediaQuery.of(context).size.width / 2 -
                       25 +
                       characterPosition,
-                  top: 500,
+                  top: 530,
                   child: Image.asset(
                     key: _key2,
                     'assets/images/character.png',
