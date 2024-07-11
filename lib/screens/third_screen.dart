@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:math_game/screens/ip_game_screen.dart';
 import 'package:math_game/utlis/questions.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
@@ -100,7 +101,7 @@ class ThirdScreen extends StatelessWidget {
                   label: 'IP CLASSES\nFUNDAMENTALS',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => GameScreen(
+                        builder: (context) => IPGameScreen(
                               quizQuestions: questions,
                             )));
                   },
