@@ -228,7 +228,8 @@ class _GameScreenState extends State<GameScreen> {
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
                   child: !_isAnimating
                       ? const SizedBox()
-                      : Wrap(
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             for (int i = 0; i < 4; i++)
                               Padding(
@@ -243,7 +244,7 @@ class _GameScreenState extends State<GameScreen> {
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'Bold',
-                                    fontSize: 28,
+                                    fontSize: 24,
                                   ),
                                 ),
                               ),
