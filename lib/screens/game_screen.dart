@@ -37,7 +37,7 @@ class _GameScreenState extends State<GameScreen> {
 
   bool _isAnimating = false;
 
-  int speed = 5;
+  int speed = 10;
 
   List<int> getUniqueRandomNumbers(int count, int min, int max) {
     Random random = Random();
@@ -184,9 +184,9 @@ class _GameScreenState extends State<GameScreen> {
                         speed = speed - 1;
 
                         if (number == 15) {
-                          speed = 5;
-                        } else if (number == 25) {
-                          speed = 3;
+                          speed = 8;
+                        } else if (number >= 25) {
+                          speed = 6;
                         }
                       });
 
