@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:math_game/widgets/text_widget.dart';
 import 'package:math_game/widgets/toast_widget.dart';
@@ -55,6 +56,20 @@ class _GameScreenState extends State<GameScreen> {
   int life = 3;
 
   int number = 1;
+
+  late AudioPlayer player = AudioPlayer();
+
+  playAudio() async {
+    player.setReleaseMode(ReleaseMode.loop);
+
+    await player.setSource(
+      AssetSource(
+        'catch.mp3',
+      ),
+    );
+
+    await player.resume();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +192,7 @@ class _GameScreenState extends State<GameScreen> {
                   key: _key1,
                   onEnd: () {
                     if (_moveDown) {
+                      playAudio();
                       // Reset position to top immediately after reaching the bottom
 
                       setState(() {
@@ -228,27 +244,30 @@ class _GameScreenState extends State<GameScreen> {
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
                   child: !_isAnimating
                       ? const SizedBox()
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            for (int i = 0; i < 4; i++)
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 30, right: 30, bottom: i * 75),
-                                child: Text(
-                                  widget.isroman
-                                      ? widget.quizQuestions[index]['options']
-                                          [i]
-                                      : widget.quizQuestions[index]['answers']
-                                          [i],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Bold',
-                                    fontSize: 24,
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              for (int i = 0; i < 4; i++)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 30, right: 30, bottom: i * 75),
+                                  child: Text(
+                                    widget.isroman
+                                        ? widget.quizQuestions[index]['options']
+                                            [i]
+                                        : widget.quizQuestions[index]['answers']
+                                            [i],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Bold',
+                                      fontSize: 24,
+                                    ),
                                   ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
                 ),
                 Positioned(

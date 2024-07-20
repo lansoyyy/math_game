@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:math_game/widgets/text_widget.dart';
 import 'package:math_game/widgets/toast_widget.dart';
@@ -55,6 +56,20 @@ class _IPGameScreenState extends State<IPGameScreen> {
   int life = 3;
 
   int number = 1;
+
+  late AudioPlayer player = AudioPlayer();
+
+  playAudio() async {
+    player.setReleaseMode(ReleaseMode.loop);
+
+    await player.setSource(
+      AssetSource(
+        'catch.mp3',
+      ),
+    );
+
+    await player.resume();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +192,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                   key: _key1,
                   onEnd: () {
                     if (_moveDown) {
+                      playAudio();
                       // Reset position to top immediately after reaching the bottom
 
                       setState(() {

@@ -57,15 +57,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 400),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.only(top: 350),
+              child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/character.png',
-                    height: 150,
-                    width: 100,
-                  ),
                   Center(
                     child: ButtonWidget(
                       radius: 100,
@@ -78,8 +72,18 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    width: 50,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/character.png',
+                        height: 200,
+                        width: 150,
+                      ),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                    ],
                   ),
                 ],
               ),
