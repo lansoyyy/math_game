@@ -150,7 +150,7 @@ class _GameScreenState extends State<GameScreen> {
                               child: Center(
                                 child: TextWidget(
                                   text: widget.quizQuestions[index]['question'],
-                                  fontSize: 14,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
