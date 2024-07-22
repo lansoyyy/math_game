@@ -60,8 +60,6 @@ class _GameScreenState extends State<GameScreen> {
   late AudioPlayer player = AudioPlayer();
 
   playAudio() async {
-    player.setReleaseMode(ReleaseMode.loop);
-
     await player.setSource(
       AssetSource(
         'catch.mp3',
@@ -69,6 +67,13 @@ class _GameScreenState extends State<GameScreen> {
     );
 
     await player.resume();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    player.stop();
+    super.dispose();
   }
 
   @override
@@ -239,7 +244,7 @@ class _GameScreenState extends State<GameScreen> {
                   },
                   top: _isAnimating
                       ? MediaQuery.of(context).size.height - 150
-                      : 150,
+                      : 120,
                   duration:
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
                   child: !_isAnimating
@@ -274,7 +279,7 @@ class _GameScreenState extends State<GameScreen> {
                   left: MediaQuery.of(context).size.width / 2 -
                       25 +
                       characterPosition,
-                  top: 530,
+                  top: 590,
                   child: Image.asset(
                     key: _key2,
                     'assets/images/character.png',
