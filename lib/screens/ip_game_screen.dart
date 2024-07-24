@@ -244,33 +244,36 @@ class _IPGameScreenState extends State<IPGameScreen> {
                       _isAnimating ? Duration(seconds: speed) : Duration.zero,
                   child: !_isAnimating
                       ? const SizedBox()
-                      : Wrap(
-                          children: [
-                            for (int i = 0; i < 4; i++)
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: i * 75),
-                                child: Text(
-                                  widget.isroman
-                                      ? widget.quizQuestions[index]['options']
-                                          [i]
-                                      : widget.quizQuestions[index]['answers']
-                                          [i],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Bold',
-                                    fontSize: 14,
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              for (int i = 0; i < 4; i++)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 20, right: 20, bottom: i * 75),
+                                  child: Text(
+                                    widget.isroman
+                                        ? widget.quizQuestions[index]['options']
+                                            [i]
+                                        : widget.quizQuestions[index]['answers']
+                                            [i],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Bold',
+                                      fontSize: 10,
+                                    ),
                                   ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
                 ),
                 Positioned(
                   left: MediaQuery.of(context).size.width / 2 -
                       25 +
                       characterPosition,
-                  top: 530,
+                  top: 590,
                   child: Image.asset(
                     key: _key2,
                     'assets/images/character.png',
