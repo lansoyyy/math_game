@@ -210,6 +210,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                         // Start the downward animation again
                         Future.delayed(const Duration(milliseconds: 50), () {
                           setState(() {
+                            // life--;
                             _moveDown = false;
 
                             index++;
@@ -217,6 +218,12 @@ class _IPGameScreenState extends State<IPGameScreen> {
                             _isAnimating = false;
 
                             number++;
+
+                            // if (life == 0) {
+                            //   Navigator.pop(context);
+
+                            //   showToast('You lost! Try again');
+                            // }
                           });
                         });
                       } catch (e) {

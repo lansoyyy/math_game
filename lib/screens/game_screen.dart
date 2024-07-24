@@ -215,6 +215,7 @@ class _GameScreenState extends State<GameScreen> {
                         // Start the downward animation again
                         Future.delayed(const Duration(milliseconds: 50), () {
                           setState(() {
+                            // life--;
                             _moveDown = true;
 
                             index++;
@@ -223,6 +224,12 @@ class _GameScreenState extends State<GameScreen> {
 
                             number++;
                           });
+
+                          // if (life == 0) {
+                          //   Navigator.pop(context);
+
+                          //   showToast('You lost! Try again');
+                          // }
                         });
                       } catch (e) {
                         print('stop');
