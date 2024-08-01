@@ -88,8 +88,10 @@ class _IPGameScreenState extends State<IPGameScreen> {
           width: double.infinity,
           height: double.infinity,
           decoration: const BoxDecoration(
+            color: Colors.white,
             image: DecorationImage(
               fit: BoxFit.cover,
+              opacity: 0.85,
               image: AssetImage(
                 'assets/images/background.jpg',
               ),
@@ -258,7 +260,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                               for (int i = 0; i < 4; i++)
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      left: 20, right: 20, bottom: i * 75),
+                                      left: 20, right: 15, bottom: i * 75),
                                   child: Text(
                                     widget.isroman
                                         ? widget.quizQuestions[index]['options']
@@ -268,7 +270,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Bold',
-                                      fontSize: 10,
+                                      fontSize: 8,
                                     ),
                                   ),
                                 ),
