@@ -25,6 +25,7 @@ class _GameScreenState extends State<GameScreen> {
   void moveLeft() {
     _checkCollision();
     setState(() {
+      character = 'assets/images/character2.png';
       characterPosition -= 50; // Adjust the value as needed
     });
   }
@@ -32,6 +33,7 @@ class _GameScreenState extends State<GameScreen> {
   void moveRight() {
     _checkCollision();
     setState(() {
+      character = 'assets/images/character.png';
       characterPosition += 50; // Adjust the value as needed
     });
   }
@@ -92,6 +94,8 @@ class _GameScreenState extends State<GameScreen> {
     player.stop();
     super.dispose();
   }
+
+  String character = 'assets/images/character.png';
 
   @override
   Widget build(BuildContext context) {
@@ -306,7 +310,7 @@ class _GameScreenState extends State<GameScreen> {
                   top: 590,
                   child: Image.asset(
                     key: _key2,
-                    'assets/images/character.png',
+                    character,
                     height: 125,
                   ),
                 ),

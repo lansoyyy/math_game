@@ -25,6 +25,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
   void moveLeft() {
     _checkCollision();
     setState(() {
+      character = 'assets/images/character2.png';
       characterPosition -= 50; // Adjust the value as needed
     });
   }
@@ -32,6 +33,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
   void moveRight() {
     _checkCollision();
     setState(() {
+      character = 'assets/images/character.png';
       characterPosition += 50; // Adjust the value as needed
     });
   }
@@ -70,6 +72,8 @@ class _IPGameScreenState extends State<IPGameScreen> {
 
     await player.resume();
   }
+
+  String character = 'assets/images/character.png';
 
   @override
   Widget build(BuildContext context) {
@@ -285,7 +289,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                   top: 590,
                   child: Image.asset(
                     key: _key2,
-                    'assets/images/character.png',
+                    character,
                     height: 125,
                   ),
                 ),
