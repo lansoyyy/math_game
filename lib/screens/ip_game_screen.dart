@@ -23,7 +23,6 @@ class _IPGameScreenState extends State<IPGameScreen> {
   final GlobalKey _key2 = GlobalKey();
 
   void moveLeft() {
-    _checkCollision();
     setState(() {
       character = 'assets/images/character2.png';
       characterPosition -= 50; // Adjust the value as needed
@@ -31,7 +30,6 @@ class _IPGameScreenState extends State<IPGameScreen> {
   }
 
   void moveRight() {
-    _checkCollision();
     setState(() {
       character = 'assets/images/character.png';
       characterPosition += 50; // Adjust the value as needed
@@ -203,7 +201,6 @@ class _IPGameScreenState extends State<IPGameScreen> {
 
                       setState(() {
                         _isAnimating = false;
-                        speed = speed - 1;
 
                         if (number == 15) {
                           speed = 5;
@@ -212,42 +209,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                         }
                       });
 
-                      try {
-                        // Start the downward animation again
-                        Future.delayed(const Duration(milliseconds: 50), () {
-                          setState(() {
-                            // life--;
-                            _moveDown = false;
-
-                            index++;
-
-                            _isAnimating = false;
-
-                            number++;
-
-                            // if (life == 0) {
-                            //   Navigator.pop(context);
-
-                            //   showToast('You lost! Try again');
-                            // }
-                          });
-                        });
-                      } catch (e) {
-                        print('stop');
-                        Navigator.pop(context);
-                      }
-
-                      if (getUniqueRandomNumbers(3, 3, 25).contains(index)) {
-                        setState(() {
-                          life--;
-
-                          if (life == 0) {
-                            Navigator.pop(context);
-
-                            showToast('You lost! Try again');
-                          }
-                        });
-                      }
+                      check();
                     }
                   },
                   top: _isAnimating
@@ -274,7 +236,7 @@ class _IPGameScreenState extends State<IPGameScreen> {
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Bold',
-                                      fontSize: 8,
+                                      fontSize: 6,
                                     ),
                                   ),
                                 ),
@@ -312,25 +274,41 @@ class _IPGameScreenState extends State<IPGameScreen> {
 
   bool _moveDown = false;
 
-  void _checkCollision() {
-    final RenderBox renderBox1 =
-        _key1.currentContext!.findRenderObject() as RenderBox;
-    final RenderBox renderBox2 =
-        _key2.currentContext!.findRenderObject() as RenderBox;
+  check() {
+    try {
+      // Start the downward animation again
+      Future.delayed(const Duration(milliseconds: 50), () {
+        if (!mounted) return;
+        setState(() {
+          // life--;
+          _moveDown = false;
 
-    final position1 = renderBox1.localToGlobal(Offset.zero);
-    final position2 = renderBox2.localToGlobal(Offset.zero);
+          index++;
 
-    final size1 = renderBox1.size;
-    final size2 = renderBox2.size;
+          _isAnimating = false;
 
-    final rect1 = position1 & size1;
-    final rect2 = position2 & size2;
+          number++;
 
-    if (rect1.overlaps(rect2)) {
-      print('Collision detected!');
-    } else {
-      print('No collision.');
+          if (getUniqueRandomNumbers(3, 3, 25).contains(index)) {
+            life--;
+          }
+
+          if (life == 0) {
+            Navigator.pop(context);
+
+            showToast('You lost! Try again');
+          }
+
+          // if (life == 0) {
+          //   Navigator.pop(context);
+
+          //   showToast('You lost! Try again');
+          // }
+        });
+      });
+    } catch (e) {
+      print('stop');
+      Navigator.pop(context);
     }
   }
 

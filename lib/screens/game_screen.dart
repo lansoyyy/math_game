@@ -23,7 +23,6 @@ class _GameScreenState extends State<GameScreen> {
   final GlobalKey _key2 = GlobalKey();
 
   void moveLeft() {
-    _checkCollision();
     setState(() {
       character = 'assets/images/character2.png';
       characterPosition -= 50; // Adjust the value as needed
@@ -31,7 +30,6 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void moveRight() {
-    _checkCollision();
     setState(() {
       character = 'assets/images/character.png';
       characterPosition += 50; // Adjust the value as needed
@@ -202,55 +200,18 @@ class _GameScreenState extends State<GameScreen> {
                   onEnd: () {
                     if (_moveDown) {
                       playAudio();
-                      // Reset position to top immediately after reaching the bottom
 
                       setState(() {
                         _isAnimating = false;
-                        speed = speed - 1;
 
-                        if (number == 15) {
+                        if (number == 5) {
                           speed = 8;
                         } else if (number >= 25) {
                           speed = 6;
                         }
                       });
 
-                      try {
-                        // Start the downward animation again
-                        Future.delayed(const Duration(milliseconds: 50), () {
-                          setState(() {
-                            // life--;
-                            _moveDown = true;
-
-                            index++;
-
-                            _isAnimating = true;
-
-                            number++;
-                          });
-
-                          // if (life == 0) {
-                          //   Navigator.pop(context);
-
-                          //   showToast('You lost! Try again');
-                          // }
-                        });
-                      } catch (e) {
-                        print('stop');
-                        Navigator.pop(context);
-                      }
-
-                      if (getUniqueRandomNumbers(3, 3, 25).contains(index)) {
-                        setState(() {
-                          life--;
-
-                          if (life == 0) {
-                            Navigator.pop(context);
-
-                            showToast('You lost! Try again');
-                          }
-                        });
-                      }
+                      check();
                     }
                   },
                   top: _isAnimating
@@ -278,7 +239,7 @@ class _GameScreenState extends State<GameScreen> {
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Bold',
-                                      fontSize: 16,
+                                      fontSize: 10,
                                     ),
                                   ),
                                 ),
@@ -314,29 +275,36 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  bool _moveDown = false;
+  check() {
+    try {
+      Future.delayed(const Duration(milliseconds: 50), () {
+        if (!mounted) return;
 
-  void _checkCollision() {
-    final RenderBox renderBox1 =
-        _key1.currentContext!.findRenderObject() as RenderBox;
-    final RenderBox renderBox2 =
-        _key2.currentContext!.findRenderObject() as RenderBox;
+        setState(() {
+          _moveDown = true;
+          index++;
+          _isAnimating = true;
+          number++;
 
-    final position1 = renderBox1.localToGlobal(Offset.zero);
-    final position2 = renderBox2.localToGlobal(Offset.zero);
+          if (getUniqueRandomNumbers(3, 3, 25).contains(index)) {
+            life--;
+          }
+        });
 
-    final size1 = renderBox1.size;
-    final size2 = renderBox2.size;
-
-    final rect1 = position1 & size1;
-    final rect2 = position2 & size2;
-
-    if (rect1.overlaps(rect2)) {
-      print('Collision detected!');
-    } else {
-      print('No collision.');
+        if (life == 0) {
+          Navigator.pop(context);
+          showToast('You lost! Try again');
+        }
+      });
+    } catch (e) {
+      print('stop');
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
+
+  bool _moveDown = false;
 
   int index = 0;
 }
