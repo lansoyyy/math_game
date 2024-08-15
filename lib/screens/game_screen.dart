@@ -71,23 +71,6 @@ class _GameScreenState extends State<GameScreen> {
     await player.resume();
   }
 
-  playAudio1() async {
-    await player.setSource(
-      AssetSource(
-        'back.mp3',
-      ),
-    );
-
-    await player.resume();
-  }
-
-  @override
-  void initState() {
-    playAudio1();
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   void dispose() {
     // TODO: implement dispose

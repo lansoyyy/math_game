@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:math_game/screens/second_screen.dart';
@@ -5,8 +6,30 @@ import 'package:math_game/screens/third_screen.dart';
 import 'package:math_game/widgets/button_widget.dart';
 import 'package:math_game/widgets/text_widget.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
+
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  late AudioPlayer player = AudioPlayer();
+  playAudio1() async {
+    await player.setSource(
+      AssetSource(
+        'back.mp3',
+      ),
+    );
+
+    await player.resume();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playAudio1();
+  }
 
   @override
   Widget build(BuildContext context) {
